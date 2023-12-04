@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "moon build --debug --target wasm-gc",
+    "serve": "http-server"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

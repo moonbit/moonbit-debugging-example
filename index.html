@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moonbit Debugging Example</title>
+  </head>
+  <body>
+    <script type="module">
+      // The generated main.wasm.map has attributed with sourceMapURL=./main.wasm.map
+      // It works fine with `WebAssembly.instantiateStreaming(fetch(...), ...)`
+      const { instance } = await WebAssembly.instantiateStreaming(
+        fetch("/target/wasm-gc/debug/build/main/main.wasm"),
+        {
+          js: {
+            log: (n) => {
+              console.log(n);
+            },
+            // This is a little trick to use js debugger statement in moonbit
+            debugger: (n) => {
+              debugger;
+            },
+          },
+        }
+      );
+      instance.exports._start();
+    </script>
+  </body>
+</html>
